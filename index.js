@@ -86,3 +86,86 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+
+// Create a new GitHub repo called Console-Finances. Then, clone it to your computer.
+// figure out how many rows there are in the finance array
+// Copy the starter files in your local git repository.
+
+// You have been given a dataset composed of arrays with two fields, Date and Profit/Losses.
+
+// Your task is to write JavaScript code that analyzes the records to calculate each of the following:
+
+// The total number of months included in the dataset.
+
+// The net total amount of Profit/Losses over the entire period.
+// add everything together
+// prob a loop
+
+// The average of the changes in Profit/Losses over the entire period.
+// calc 
+
+// You will need to track what the total change in profits are from month to month and then find the average.
+// (Total/Number of months)
+// The greatest increase in profits (date and amount) over the entire period.
+
+// The greatest decrease in losses (date and amount) over the entire period.
+
+// Financial Analysis
+// ----------------------------
+// Total Months: 25
+// Total: $2561231
+// Average  Change: $-2315.12
+// Greatest Increase in Profits: Feb-2012 ($1926159)
+// Greatest Decrease in Profits: Sep-2013 ($-2196167)
+
+var dates = [];
+var totalMonths = finances.length;
+var totalArr = [];
+var totalAmount = 0;
+var aveChange = 0;
+var avCha = [];
+var chaPro = [];
+
+
+
+
+for (var i = 0; i < finances.length; i++) {
+    totalArr.push(finances[i][1]);
+    totalAmount += totalArr[i];
+    avCha.push(totalArr[i] - totalArr[i -1])
+    dates.push(finances[i][0])
+}
+
+for(var i = 1; i < avCha.length; i++) {
+ aveChange += avCha[i];   
+}
+
+
+avCha.shift()
+var greatestProfits = Math.max(...avCha);
+var greatestLosses = Math.min(...avCha)
+
+
+
+var indexProfits = avCha.indexOf(greatestProfits)
+var indexLosses = avCha.indexOf(greatestLosses)
+
+// Total Average changes
+aveChange = aveChange/(finances.length-1)
+console.log("Financial Analysis")
+console.log("-----------------------------------------")
+console.log(`Total Months: ${totalMonths}`)
+console.log(`Total: $${totalAmount}`)
+console.log(`Average Change: $${aveChange.toFixed(2)}`)
+console.log(`Greatest Increase in Profits: ${finances[indexProfits+1][0]} ($${greatestProfits})`)
+console.log(`Greatest Losses in Profits: ${finances[indexLosses+1][0]} ($${greatestLosses})`)
+
+
+document.getElementById("months").innerHTML = totalMonths;
+document.getElementById("total").innerHTML = totalAmount;
+document.getElementById("aveChange").innerHTML = aveChange.toFixed(2);
+document.getElementById("profits").innerHTML = greatestProfits;
+document.getElementById("losses").innerHTML = greatestLosses;
+document.getElementById("proMonth").innerHTML = finances[indexProfits +1][0];
+document.getElementById("losMonth").innerHTML = finances[indexLosses +1][0];
