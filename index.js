@@ -1,3 +1,4 @@
+// Dataset 
 var finances = [
 ['Jan-2010', 867884],
 ['Feb-2010', 984655],
@@ -87,38 +88,7 @@ var finances = [
 ['Feb-2017', 671099]
 ];
 
-
-// Create a new GitHub repo called Console-Finances. Then, clone it to your computer.
-// figure out how many rows there are in the finance array
-// Copy the starter files in your local git repository.
-
-// You have been given a dataset composed of arrays with two fields, Date and Profit/Losses.
-
-// Your task is to write JavaScript code that analyzes the records to calculate each of the following:
-
-// The total number of months included in the dataset.
-
-// The net total amount of Profit/Losses over the entire period.
-// add everything together
-// prob a loop
-
-// The average of the changes in Profit/Losses over the entire period.
-// calc 
-
-// You will need to track what the total change in profits are from month to month and then find the average.
-// (Total/Number of months)
-// The greatest increase in profits (date and amount) over the entire period.
-
-// The greatest decrease in losses (date and amount) over the entire period.
-
-// Financial Analysis
-// ----------------------------
-// Total Months: 25
-// Total: $2561231
-// Average  Change: $-2315.12
-// Greatest Increase in Profits: Feb-2012 ($1926159)
-// Greatest Decrease in Profits: Sep-2013 ($-2196167)
-
+// Variables to track the data
 var dates = [];
 var totalMonths = finances.length;
 var totalArr = [];
@@ -129,7 +99,7 @@ var chaPro = [];
 
 
 
-
+//  For loop to push the data into seperate arrays
 for (var i = 0; i < finances.length; i++) {
     totalArr.push(finances[i][1]);
     totalAmount += totalArr[i];
@@ -137,21 +107,19 @@ for (var i = 0; i < finances.length; i++) {
     dates.push(finances[i][0])
 }
 
+// For loop to find the averave change in the array
 for(var i = 1; i < avCha.length; i++) {
  aveChange += avCha[i];   
 }
 
-
+//  variables to find the data with the greatest profits/losses
 avCha.shift()
 var greatestProfits = Math.max(...avCha);
 var greatestLosses = Math.min(...avCha)
-
-
-
 var indexProfits = avCha.indexOf(greatestProfits)
 var indexLosses = avCha.indexOf(greatestLosses)
 
-// Total Average changes
+// Total Findings displayed in the console
 aveChange = aveChange/(finances.length-1)
 console.log("Financial Analysis")
 console.log("-----------------------------------------")
@@ -161,7 +129,7 @@ console.log(`Average Change: $${aveChange.toFixed(2)}`)
 console.log(`Greatest Increase in Profits: ${finances[indexProfits+1][0]} ($${greatestProfits})`)
 console.log(`Greatest Losses in Profits: ${finances[indexLosses+1][0]} ($${greatestLosses})`)
 
-
+// Display data within the ID's of the browser
 document.getElementById("months").innerHTML = totalMonths;
 document.getElementById("total").innerHTML = totalAmount;
 document.getElementById("aveChange").innerHTML = aveChange.toFixed(2);
